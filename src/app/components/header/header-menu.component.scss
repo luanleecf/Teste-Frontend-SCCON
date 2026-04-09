@@ -51,8 +51,8 @@
   font-size: vars.$font-size-base;
   font-weight: 400;
   padding: vars.$nav-padding-vertical-endereco vars.$nav-padding-horizontal;
-  border: vars.$nav-border-width solid vars.$color-nav-border-light;
-  border-radius: 0;
+  border: vars.$nav-border-width solid vars.$color-border;
+  border-radius: vars.$border-radius-sm;
   background-color: vars.$color-button;
   cursor: pointer;
   transition: all vars.$transition-speed vars.$transition-easing;
@@ -73,7 +73,7 @@
   }
 
   &.open {
-    border: 1px solid vars.$color-nav-border-light;
+    border: 1px solid vars.$color-border;
     background-color: vars.$color-button-hover;
 
     &::after {
@@ -88,7 +88,7 @@
   left: 0;
   right: 0;
   background-color: vars.$color-primary;
-  border: vars.$nav-border-width solid vars.$color-nav-border-light;
+  border: 1px solid vars.$color-button-hover;
   border-top: none;
   z-index: vars.$nav-dropdown-z-index;
   animation: slideDown vars.$transition-speed vars.$transition-easing;
@@ -97,7 +97,6 @@
 .nav-dropdown-item {
   display: block;
   width: 100%;
-  // color: vars.$color-white;
   color: vars.$color-text;
   text-decoration: none;
   font-size: vars.$font-size-base;
@@ -113,7 +112,8 @@
   }
 
   &.active {
-    background-color: vars.$color-button;
+    background-color: vars.$color-button-hover;
+    
   }
 }
 
@@ -123,8 +123,8 @@
   font-size: vars.$font-size-base;
   font-weight: 400;
   padding: vars.$nav-padding-vertical vars.$nav-padding-horizontal;
-  border: vars.$nav-border-width solid vars.$color-nav-border-light;
-  border-radius: 0;
+  border: vars.$nav-border-width solid vars.$color-border;
+  border-radius: vars.$border-radius-sm;
   background-color: vars.$color-button;
   cursor: pointer;
   transition: all vars.$transition-speed vars.$transition-easing;
@@ -134,8 +134,7 @@
   }
 
   &.active {
-    // border: vars.$nav-border-width solid vars.$color-nav-border-light;
-    // background-color: vars.$color-button-hover;
+    background-color: vars.$color-button-hover;
   }
 }
 
@@ -144,6 +143,7 @@
     opacity: 0;
     transform: translateY(vars.$nav-animation-translate-y);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -241,7 +241,6 @@
     position: static;
     background-color: darken(vars.$color-primary, 8%);
     border: none;
-    border-left: 3px solid vars.$color-nav-border-light;
     padding: 0;
     animation: none;
     z-index: auto;
@@ -256,7 +255,7 @@
 
     &:hover,
     &.active {
-      background-color: lighten(vars.$color-nav-hover-light, 5%);
+      background-color: vars.$color-button-hover;
     }
   }
 }
