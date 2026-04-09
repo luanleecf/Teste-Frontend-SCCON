@@ -1,11 +1,9 @@
 <header class="app-header">
   <div class="header-container">
-    <!-- Logo -->
     <div class="logo-area">
       <div class="logo-box">
-        <img src="assets/logo-sccon.svg" alt="Logo SCCON" class="logo" />
+        <div class="logo" aria-label="Logo SCCON"></div>
       </div>
-      <span class="brand-text">SCCON</span>
     </div>
 
     <!-- Menu de Navegação -->
@@ -33,12 +31,12 @@
 
   <!-- Menu Mobile -->
   @if (menuAberto) {
-    <nav class="nav-mobile">
-      <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">Home</a>
-      <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">Endereços</a>
-      <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item submenu-item">
-        Buscar Endereços
-      </a>
-    </nav>
+  <nav class="nav-mobile">
+    <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">Home</a>
+    <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">Endereços</a>
+    <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item submenu-item">
+      Buscar Endereços
+    </a>
+  </nav>
   }
 </header>

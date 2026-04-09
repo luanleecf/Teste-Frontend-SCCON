@@ -1,8 +1,8 @@
 @import '../../../styles/variables';
 
 .app-header {
-  background-color: $color-background;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  // border-bottom: 1px solid $color-header-border;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $spacing-sm $spacing-lg;
+    padding: $spacing-sm $spacing-sm;
     max-width: 1400px;
     margin: 0 auto;
 
@@ -32,37 +32,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  border: 2px solid white;
-  border-radius: 2px;
-  background-color: transparent;
+  width: 80px;
+  height: 80px;
+  border: none;
+  border-radius: 0;
+  background-color: $color-white;
 }
 
 .logo {
-  width: 90%;
-  height: 90%;
-  object-fit: contain;
-  filter: invert(12%) sepia(71%) saturate(2166%) hue-rotate(357deg) brightness(107%);
-
+  width: 100px;
+  height: 100px;
+  background-color: $color-primary;
+  -webkit-mask: url('/assets/logo-sccon.svg') no-repeat center;
+  mask: url('/assets/logo-sccon.svg') no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
 }
 
 .brand-text {
-  font-size: $font-size-xl;
-  font-weight: 700;
-  color: white;
-  letter-spacing: 2px;
-
-  @media (max-width: $breakpoint-md) {
-    display: none;
-  }
+  display: none;
 }
-
 // -------- MENU DESKTOP --------
 .nav-menu {
   display: flex;
   gap: $spacing-lg;
   align-items: center;
+  background-color: $color-primary;
+
 
   @media (max-width: $breakpoint-md) {
     display: none;
@@ -76,23 +72,23 @@
 }
 
 .nav-item {
-  color: $color-text;
+  color: $color-white;
   text-decoration: none;
   font-size: $font-size-base;
-  font-weight: 500;
+  font-weight: 400;
   padding: $spacing-sm $spacing-md;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  transition: all $transition-speed $transition-easing;
+  border: 1px solid $color-nav-border-light;
+  border-radius: 0;
+  background-color: transparent;
   cursor: pointer;
 
   &:hover {
-    border: 1px solid white;
+    background-color: $color-nav-hover-light;
   }
 
   &.active {
-    border: 1px solid white;
-    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid $color-white;
+    background-color: $color-nav-hover-light;
   }
 
   &.submenu-item {
@@ -118,7 +114,7 @@
   span {
     width: 25px;
     height: 3px;
-    background-color: white;
+    background-color: $color-white;
     border-radius: 2px;
     transition: all $transition-speed $transition-easing;
   }
@@ -127,9 +123,9 @@
 .nav-mobile {
   display: none;
   flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: $color-nav-hover-light;
   padding: $spacing-md 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid $color-nav-border-light;
 
   @media (max-width: $breakpoint-md) {
     display: flex;
@@ -143,7 +139,7 @@
 
     &:hover,
     &.active {
-      background-color: rgba(255, 255, 255, 0.15);
+      background-color: $color-nav-hover-light;
       border: none;
     }
 
