@@ -30,6 +30,7 @@ export class HeaderMenu {
     const target = evento.target as HTMLElement;
     if (!this.elementRef.nativeElement.contains(target)) {
       this.subMenuEnderecosAberto = false;
+      this.menuAberto = false; // Mobile: fecha o menu inteiro ao clicar fora
     }
   }
 
