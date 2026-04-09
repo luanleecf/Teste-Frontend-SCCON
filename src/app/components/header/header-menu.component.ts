@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderMenu {
   menuAberto = false;
+  subMenuEnderecosAberto = false;
 
   toggle() {
     this.menuAberto = !this.menuAberto;
@@ -19,4 +20,10 @@ export class HeaderMenu {
   fecharMenu() {
     this.menuAberto = false;
   }
+
+  toggleSubMenuEnderecos(evento: Event) {
+    evento.preventDefault();
+    this.subMenuEnderecosAberto = !this.subMenuEnderecosAberto;
+  }
 }
+

@@ -1,4 +1,4 @@
-@import '../../../../../styles/variables';
+@use '../../../../../styles/variables' as vars;
 
 .container-main {
   min-height: calc(100vh - 80px);
@@ -6,91 +6,91 @@
   align-items: center;
   justify-content: center;
   background-color: #d8d8d8; // Cinza como no wireframe
-  padding: $spacing-lg;
+  padding: vars.$spacing-lg;
 
-  @media (max-width: $breakpoint-md) {
-    padding: $spacing-md;
+  @media (max-width: vars.$breakpoint-md) {
+    padding: vars.$spacing-md;
   }
 }
 
 .hero-section {
   background-color: #ffffff;
-  padding: $spacing-lg $spacing-xl;
+  padding: vars.$spacing-lg vars.$spacing-xl;
   text-align: center;
   font-style: italic;
 
-  @media (max-width: $breakpoint-md) {
-    padding: $spacing-lg;
-    border-radius: $border-radius-md;
+  @media (max-width: vars.$breakpoint-md) {
+    padding: vars.$spacing-lg;
+    border-radius: vars.$border-radius-md;
   }
 
-  @media (max-width: $breakpoint-sm) {
-    padding: $spacing-md;
+  @media (max-width: vars.$breakpoint-sm) {
+    padding: vars.$spacing-md;
   }
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  gap: $spacing-lg;
+  gap: vars.$spacing-lg;
 }
 
 .title {
-  font-size: $font-size-2xl;
-  color: $color-primary;
+  font-size: vars.$font-size-2xl;
+  color: vars.$color-primary;
   margin: 0;
   font-weight: 700;
   line-height: 1.3;
 
-  @media (max-width: $breakpoint-md) {
-    font-size: $font-size-xl;
+  @media (max-width: vars.$breakpoint-md) {
+    font-size: vars.$font-size-xl;
   }
 
-  @media (max-width: $breakpoint-sm) {
-    font-size: $font-size-lg;
+  @media (max-width: vars.$breakpoint-sm) {
+    font-size: vars.$font-size-lg;
   }
 }
 
 .subtitle {
-  font-size: $font-size-base;
+  font-size: vars.$font-size-base;
   color: #666666;
   margin: 0;
   line-height: 1.6;
   font-style: italic;
   white-space: nowrap;
 
-  @media (max-width: $breakpoint-md) {
-    font-size: $font-size-sm;
+  @media (max-width: vars.$breakpoint-md) {
+    font-size: vars.$font-size-sm;
     white-space: normal;
   }
 
   strong {
-    color: $color-text;
+    color: vars.$color-text;
     font-weight: 600;
   }
 }
 
 .action-buttons {
   display: flex;
-  gap: $spacing-md;
+  gap: vars.$spacing-md;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .btn {
-  @include button-primary;
+  @include vars.button-primary;
   display: inline-flex;
   align-items: center;
-  gap: $spacing-sm;
-  padding: $spacing-md $spacing-xl;
-  font-size: $font-size-base;
+  gap: vars.$spacing-sm;
+  padding: vars.$spacing-md vars.$spacing-xl;
+  font-size: vars.$font-size-base;
   text-decoration: none;
   min-width: 200px;
   justify-content: center;
 
-  @media (max-width: $breakpoint-md) {
+  @media (max-width: vars.$breakpoint-md) {
     min-width: 150px;
-    padding: $spacing-sm $spacing-lg;
+    padding: vars.$spacing-sm vars.$spacing-lg;
   }
 
   span {
@@ -103,11 +103,11 @@
   }
 
   &.btn-primary {
-    background-color: $color-button;
-    color: $color-text;
+    background-color: vars.$color-button;
+    color: vars.$color-text;
 
     &:hover {
-      background-color: $color-button-hover;
+      background-color: vars.$color-button-hover;
     }
   }
 }

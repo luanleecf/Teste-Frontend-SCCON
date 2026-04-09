@@ -1,4 +1,4 @@
-@import '../../../styles/variables';
+@use '../../../styles/variables' as vars;
 
 .header-sccon {
   background-color: transparent;
@@ -10,7 +10,7 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding-top: $spacing-sm;
+  padding-top: vars.$spacing-sm;
   
   sccon-header-menu {
     margin-left: auto;
@@ -22,7 +22,7 @@
 .logo-area {
   display: flex;
   align-items: center;
-  gap: $spacing-md;
+  gap: vars.$spacing-md;
 }
 
 .logo-box {
@@ -38,7 +38,7 @@
 .logo {
   width: 100%;
   height: 100%;
-  background-color: $color-primary;
+  background-color: vars.$color-primary;
   -webkit-mask: url('/assets/logo-sccon.svg') no-repeat center;
   mask: url('/assets/logo-sccon.svg') no-repeat center;
   -webkit-mask-size: contain;

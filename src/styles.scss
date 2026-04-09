@@ -1,14 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 // ========== IMPORTAR VARIÁVEIS ==========
-@import 'styles/variables';
+@use 'styles/variables' as vars;
 
 // ========== IMPORTAR TEMAS ANGULAR MATERIAL ==========
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
-
-// ========== IMPORTAR MATERIAL ICONS E FONTES ==========
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 // ========== ESTILOS GLOBAIS ==========
 * {
@@ -20,21 +16,21 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: $font-family;
+  font-family: vars.$font-family;
   background-color: #d8d8d8; // Cinza como no wireframe
-  color: $color-text;
+  color: vars.$color-text;
   line-height: 1.6;
 }
 
 // ========== VARIÁVEIS CSS GLOBAIS (FALLBACK) ==========
 :root {
-  --primary-color: #{$color-primary};
-  --secondary-color: #{$color-button};
-  --error-color: #{$color-error};
-  --text-primary: #{$color-text};
-  --text-light: #{$color-text-light};
-  --background: #{$color-background};
-  --border-color: #{$color-border};
+  --primary-color: #{vars.$color-primary};
+  --secondary-color: #{vars.$color-button};
+  --error-color: #{vars.$color-error};
+  --text-primary: #{vars.$color-text};
+  --text-light: #{vars.$color-text-light};
+  --background: #{vars.$color-background};
+  --border-color: #{vars.$color-border};
 }
 
 // ========== ESTILOS DE SCROLLBAR ==========
@@ -44,21 +40,21 @@ html, body {
 }
 
 ::-webkit-scrollbar-track {
-  background: $color-border;
+  background: vars.$color-border;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $color-text-light;
+  background: vars.$color-text-light;
   border-radius: 5px;
 
   &:hover {
-    background: $color-text;
+    background: vars.$color-text;
   }
 }
 
 // ========== ACESSIBILIDADE ==========
 :focus-visible {
-  outline: 2px solid $color-primary;
+  outline: 2px solid vars.$color-primary;
   outline-offset: 2px;
 }
 

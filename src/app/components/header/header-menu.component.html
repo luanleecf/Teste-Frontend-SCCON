@@ -4,13 +4,17 @@
     <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">
       Home
     </a>
-    <div class="nav-group">
-      <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">
+    <div class="nav-dropdown">
+      <button (click)="toggleSubMenuEnderecos($event)" class="nav-item nav-dropdown-trigger" [class.open]="subMenuEnderecosAberto">
         Endereços
-      </a>
-      <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item submenu-item">
-        Buscar Endereços
-      </a>
+      </button>
+      @if (subMenuEnderecosAberto) {
+        <div class="nav-dropdown-menu">
+          <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-dropdown-item">
+            Buscar Endereços
+          </a>
+        </div>
+      }
     </div>
   </nav>
 
@@ -26,9 +30,17 @@
 @if (menuAberto) {
 <nav class="nav-mobile">
   <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">Home</a>
-  <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">Endereços</a>
-  <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item submenu-item">
-    Buscar Endereços
-  </a>
+  <div class="nav-dropdown">
+    <button (click)="toggleSubMenuEnderecos($event)" class="nav-item nav-dropdown-trigger" [class.open]="subMenuEnderecosAberto">
+      Endereços
+    </button>
+    @if (subMenuEnderecosAberto) {
+      <div class="nav-dropdown-menu">
+        <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-dropdown-item">
+          Buscar Endereços
+        </a>
+      </div>
+    }
+  </div>
 </nav>
 }
