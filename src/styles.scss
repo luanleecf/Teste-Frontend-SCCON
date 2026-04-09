@@ -1,23 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
 
-// Importar temas do Angular Material
+// ========== IMPORTAR VARIÁVEIS ==========
+@import 'styles/variables';
+
+// ========== IMPORTAR TEMAS ANGULAR MATERIAL ==========
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
-// Importar Material Icons
+// ========== IMPORTAR MATERIAL ICONS E FONTES ==========
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-// Estilos globais
+// ========== ESTILOS GLOBAIS ==========
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   padding: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: $font-family;
+  background-color: $color-background;
+  color: $color-text;
+  line-height: 1.6;
 }
 
-// Variáveis SCCON
+// ========== VARIÁVEIS CSS GLOBAIS (FALLBACK) ==========
 :root {
-  --primary-color: #670000;
-  --secondary-color: #D7DBDD;
+  --primary-color: #{$color-primary};
+  --secondary-color: #{$color-button};
+  --error-color: #{$color-error};
+  --text-primary: #{$color-text};
+  --text-light: #{$color-text-light};
+  --background: #{$color-background};
+  --border-color: #{$color-border};
+}
+
+// ========== ESTILOS DE SCROLLBAR ==========
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $color-border;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-text-light;
+  border-radius: 5px;
+
+  &:hover {
+    background: $color-text;
+  }
+}
+
+// ========== ACESSIBILIDADE ==========
+:focus-visible {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+button:disabled,
+a[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.6;
   --text-primary: #333;
   --text-secondary: #666;
   --background-light: #f5f5f5;

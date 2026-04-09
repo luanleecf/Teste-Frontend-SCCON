@@ -1,0 +1,91 @@
+@use 'sass:color';
+
+// VARIÁVEIS GLOBAIS SCCON
+
+// -------- CORES --------
+$color-primary: #670000;
+$color-button: #D7DBDD;
+$color-button-hover: color.adjust($color-button, $lightness: -6%);
+$color-error: #d32f2f;
+$color-text: #333333;
+$color-text-light: #666666;
+$color-background: #ffffff;
+$color-border: #e0e0e0;
+
+// -------- ESPAÇAMENTOS --------
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+
+// -------- BORDAS --------
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+
+// -------- FONTS --------
+$font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-lg: 1.25rem;
+$font-size-xl: 1.5rem;
+$font-size-2xl: 2rem;
+
+// -------- TRANSITIONS --------
+$transition-speed: 0.3s;
+$transition-easing: ease-in-out;
+
+// -------- BREAKPOINTS --------
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// -------- MIXINS --------
+@mixin button-base {
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid transparent;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  font-size: $font-size-base;
+  font-weight: 500;
+  transition: background-color $transition-speed $transition-easing;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background-color: $color-button;
+  color: $color-text;
+  
+  &:hover {
+    background-color: $color-button-hover;
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin responsive-text {
+  @media (max-width: $breakpoint-md) {
+    font-size: calc(100% - 0.25rem);
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

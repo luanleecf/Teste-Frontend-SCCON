@@ -1,4 +1,44 @@
-<mat-toolbar color="primary" class="app-toolbar">
-  <h1 class="app-title">SCCON - Teste Frontend</h1>
-</mat-toolbar>
+<header class="app-header">
+  <div class="header-container">
+    <!-- Logo -->
+    <div class="logo-area">
+      <div class="logo-box">
+        <img src="assets/logo-sccon.svg" alt="Logo SCCON" class="logo" />
+      </div>
+      <span class="brand-text">SCCON</span>
+    </div>
 
+    <!-- Menu de Navegação -->
+    <nav class="nav-menu">
+      <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">
+        Home
+      </a>
+      <div class="nav-group">
+        <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">
+          Endereços
+        </a>
+        <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item submenu-item">
+          Buscar Endereços
+        </a>
+      </div>
+    </nav>
+
+    <!-- Menu Mobile Toggle -->
+    <button class="menu-toggle" (click)="toggle()" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Menu Mobile -->
+  @if (menuAberto) {
+    <nav class="nav-mobile">
+      <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">Home</a>
+      <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">Endereços</a>
+      <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item submenu-item">
+        Buscar Endereços
+      </a>
+    </nav>
+  }
+</header>

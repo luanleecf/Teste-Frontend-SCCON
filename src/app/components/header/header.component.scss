@@ -1,11 +1,155 @@
-.app-toolbar {
-  background-color: #670000 !important;
+@import '../../../styles/variables';
 
-  .app-title {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #ffffff;
+.app-header {
+  background-color: $color-background;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-sm $spacing-lg;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    @media (max-width: $breakpoint-md) {
+      padding: $spacing-sm $spacing-md;
+    }
   }
 }
 
+// -------- LOGO --------
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: 2px solid white;
+  border-radius: 2px;
+  background-color: transparent;
+}
+
+.logo {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  filter: invert(12%) sepia(71%) saturate(2166%) hue-rotate(357deg) brightness(107%);
+
+}
+
+.brand-text {
+  font-size: $font-size-xl;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 2px;
+
+  @media (max-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
+// -------- MENU DESKTOP --------
+.nav-menu {
+  display: flex;
+  gap: $spacing-lg;
+  align-items: center;
+
+  @media (max-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
+.nav-group {
+  display: flex;
+  gap: $spacing-md;
+  align-items: center;
+}
+
+.nav-item {
+  color: $color-text;
+  text-decoration: none;
+  font-size: $font-size-base;
+  font-weight: 500;
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  transition: all $transition-speed $transition-easing;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid white;
+  }
+
+  &.active {
+    border: 1px solid white;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  &.submenu-item {
+    font-size: $font-size-sm;
+    padding-left: calc($spacing-md + $spacing-sm);
+  }
+}
+
+// -------- MENU MOBILE --------
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  @media (max-width: $breakpoint-md) {
+    display: flex;
+  }
+
+  span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: all $transition-speed $transition-easing;
+  }
+}
+
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: $spacing-md 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media (max-width: $breakpoint-md) {
+    display: flex;
+  }
+
+  .nav-item {
+    border: none;
+    padding: $spacing-md $spacing-lg;
+    border-radius: 0;
+    font-size: $font-size-base;
+
+    &:hover,
+    &.active {
+      background-color: rgba(255, 255, 255, 0.15);
+      border: none;
+    }
+
+    &.submenu-item {
+      padding-left: calc($spacing-lg + $spacing-lg);
+      font-size: $font-size-sm;
+    }
+  }
+}

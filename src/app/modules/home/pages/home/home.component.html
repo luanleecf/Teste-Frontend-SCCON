@@ -1,9 +1,20 @@
-<div class="home-container">
-  <h2>Bem-vindo ao Teste Frontend SCCON</h2>
-  <p>Desenvolvedor: Luan Lee da Costa Faria</p>
-  <p>Data do teste: 09/04/2026</p>
-  <nav class="nav-links">
-    <a routerLink="/cep" class="btn">Ir para Busca de CEP</a>
-  </nav>
-</div>
+<main class="container-main">
+  <section class="hero-section">
+    <div class="content">
+      <h1 class="title">Bem-vindo/a ao Teste de Front-End</h1>
+      
+      <div class="info-section">
+        <p class="subtitle">
+          Teste Realizado por <strong>{{ nomeDesenvolvedor }}</strong> <br/>
+          em <strong>{{ dataAtual }}</strong>
+        </p>
+      </div>
 
+      <div class="action-buttons">
+        <a routerLink="/cep" class="btn btn-primary">
+          <span>→</span> Buscar Endereços
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
