@@ -4,7 +4,7 @@
     <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item" aria-label="Ir para Home">
       Home
     </a>
-    <div class="nav-dropdown" #navDropdown>
+    <div class="nav-dropdown">
       <button (click)="toggleSubMenuEnderecos($event)" class="nav-dropdown-trigger" [class.open]="subMenuEnderecosAberto" [attr.aria-expanded]="subMenuEnderecosAberto" aria-haspopup="true" aria-label="Menu de Endereços">
         Endereços
       </button>
@@ -30,7 +30,7 @@
 @if (menuAberto) {
 <nav class="nav-mobile" id="nav-mobile" role="navigation" aria-label="Menu de navegação mobile">
   <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item" aria-label="Ir para Home">Home</a>
-  <div class="nav-dropdown" #navDropdown>
+  <div class="nav-dropdown">
     <button (click)="toggleSubMenuEnderecos($event)" class="nav-dropdown-trigger" [class.open]="subMenuEnderecosAberto" [attr.aria-expanded]="subMenuEnderecosAberto" aria-haspopup="true" aria-label="Menu de Endereços (mobile)">
       Endereços
     </button>
