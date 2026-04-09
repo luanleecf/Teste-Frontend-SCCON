@@ -1,42 +1,16 @@
-<header class="app-header">
+<header class="header-sccon">
+  <!-- Logo -->
   <div class="header-container">
     <div class="logo-area">
       <div class="logo-box">
         <div class="logo" aria-label="Logo SCCON"></div>
       </div>
     </div>
-
-    <!-- Menu de Navegação -->
-    <nav class="nav-menu">
-      <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">
-        Home
-      </a>
-      <div class="nav-group">
-        <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">
-          Endereços
-        </a>
-        <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item submenu-item">
-          Buscar Endereços
-        </a>
-      </div>
-    </nav>
-
-    <!-- Menu Mobile Toggle -->
-    <button class="menu-toggle" (click)="toggle()" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
   </div>
 
-  <!-- Menu Mobile -->
-  @if (menuAberto) {
-  <nav class="nav-mobile">
-    <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">Home</a>
-    <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">Endereços</a>
-    <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-item submenu-item">
-      Buscar Endereços
-    </a>
-  </nav>
-  }
+  <!-- Spacer para empurrar menu à direita -->
+  <div class="header-spacer"></div>
+
+  <!-- Menu -->
+  <sccon-header-menu></sccon-header-menu>
 </header>

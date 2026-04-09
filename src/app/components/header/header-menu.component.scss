@@ -1,0 +1,107 @@
+@import '../../../styles/variables';
+
+// -------- MENU CONTAINER --------
+.menu-container {
+  display: flex;
+  align-items: center;
+  background-color: $color-primary;
+  height: 100%;
+  padding: 0 $spacing-lg;
+}
+
+// -------- MENU DESKTOP --------
+.nav-menu {
+  display: flex;
+  gap: $spacing-lg;
+  align-items: center;
+  background-color: transparent;
+
+  @media (max-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
+.nav-group {
+  display: flex;
+  gap: $spacing-md;
+  align-items: center;
+}
+
+.nav-item {
+  color: $color-white;
+  text-decoration: none;
+  font-size: $font-size-base;
+  font-weight: 400;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid $color-nav-border-light;
+  border-radius: 0;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-nav-hover-light;
+  }
+
+  &.active {
+    border: 1px solid $color-white;
+    background-color: $color-nav-hover-light;
+  }
+
+  &.submenu-item {
+    font-size: $font-size-sm;
+    padding-left: calc(0.8rem + $spacing-sm);
+  }
+}
+
+// -------- MENU MOBILE --------
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  @media (max-width: $breakpoint-md) {
+    display: flex;
+  }
+
+  span {
+    width: 25px;
+    height: 3px;
+    background-color: $color-white;
+    border-radius: 2px;
+    transition: all $transition-speed $transition-easing;
+  }
+}
+
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  background-color: $color-primary;
+  padding: $spacing-md 0;
+  border-top: 1px solid $color-nav-border-light;
+
+  @media (max-width: $breakpoint-md) {
+    display: flex;
+  }
+
+  .nav-item {
+    border: none;
+    padding: 0.4rem $spacing-lg;
+    border-radius: 0;
+    font-size: $font-size-base;
+
+    &:hover,
+    &.active {
+      background-color: $color-nav-hover-light;
+      border: none;
+    }
+
+    &.submenu-item {
+      padding-left: calc($spacing-lg + $spacing-lg);
+      font-size: $font-size-sm;
+    }
+  }
+}
