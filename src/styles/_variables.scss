@@ -49,6 +49,25 @@ $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
 
+// -------- HEADER/MENU --------
+$nav-padding-vertical: 0.7rem;
+$nav-padding-horizontal: 1.3rem;
+$nav-mobile-padding-vertical: 0.4rem;
+$nav-mobile-padding-horizontal: 2rem;
+$nav-border-width: 1px;
+$nav-dropdown-z-index: 100;
+$nav-dropdown-arrow-size: 4px;
+$nav-dropdown-arrow-height: 5px;
+$nav-dropdown-arrow-margin: 0.3rem;
+$nav-toggle-gap: 6px;
+$nav-toggle-width: 25px;
+$nav-toggle-height: 3px;
+$nav-toggle-radius: 2px;
+$nav-animation-translate-y: -5px;
+$header-z-index: 100;
+$header-max-width: 1400px;
+$logo-size: 100px;
+
 // -------- MIXINS --------
 @mixin button-base {
   padding: $spacing-sm $spacing-md;

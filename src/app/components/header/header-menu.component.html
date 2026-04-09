@@ -1,16 +1,16 @@
-<div class="menu-container">
+<div class="menu-container" role="navigation" aria-label="Menu principal">
   <!-- Menu de Navegação -->
   <nav class="nav-menu">
-    <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">
+    <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item" aria-label="Ir para Home">
       Home
     </a>
-    <div class="nav-dropdown">
-      <button (click)="toggleSubMenuEnderecos($event)" class="nav-item nav-dropdown-trigger" [class.open]="subMenuEnderecosAberto">
+    <div class="nav-dropdown" #navDropdown>
+      <button (click)="toggleSubMenuEnderecos($event)" class="nav-dropdown-trigger" [class.open]="subMenuEnderecosAberto" [attr.aria-expanded]="subMenuEnderecosAberto" aria-haspopup="true" aria-label="Menu de Endereços">
         Endereços
       </button>
       @if (subMenuEnderecosAberto) {
-        <div class="nav-dropdown-menu">
-          <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-dropdown-item">
+        <div class="nav-dropdown-menu" role="menu">
+          <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-dropdown-item" role="menuitem" aria-label="Buscar Endereços">
             Buscar Endereços
           </a>
         </div>
@@ -19,7 +19,7 @@
   </nav>
 
   <!-- Menu Mobile Toggle -->
-  <button class="menu-toggle" (click)="toggle()" aria-label="Menu">
+  <button class="menu-toggle" (click)="toggle()" [attr.aria-expanded]="menuAberto" aria-controls="nav-mobile" aria-label="Abrir menu de navegação mobile">
     <span></span>
     <span></span>
     <span></span>
@@ -28,15 +28,15 @@
 
 <!-- Menu Mobile -->
 @if (menuAberto) {
-<nav class="nav-mobile">
-  <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item">Home</a>
-  <div class="nav-dropdown">
-    <button (click)="toggleSubMenuEnderecos($event)" class="nav-item nav-dropdown-trigger" [class.open]="subMenuEnderecosAberto">
+<nav class="nav-mobile" id="nav-mobile" role="navigation" aria-label="Menu de navegação mobile">
+  <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item" aria-label="Ir para Home">Home</a>
+  <div class="nav-dropdown" #navDropdown>
+    <button (click)="toggleSubMenuEnderecos($event)" class="nav-dropdown-trigger" [class.open]="subMenuEnderecosAberto" [attr.aria-expanded]="subMenuEnderecosAberto" aria-haspopup="true" aria-label="Menu de Endereços (mobile)">
       Endereços
     </button>
     @if (subMenuEnderecosAberto) {
-      <div class="nav-dropdown-menu">
-        <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-dropdown-item">
+      <div class="nav-dropdown-menu" role="menu">
+        <a routerLink="/cep" routerLinkActive="active" (click)="fecharMenu()" class="nav-dropdown-item" role="menuitem" aria-label="Buscar Endereços">
           Buscar Endereços
         </a>
       </div>

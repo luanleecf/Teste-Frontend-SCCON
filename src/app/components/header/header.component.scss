@@ -4,11 +4,11 @@
   background-color: transparent;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: vars.$header-z-index;
   display: flex;
   align-items: stretch;
   width: 100%;
-  max-width: 1400px;
+  max-width: vars.$header-max-width;
   margin: 0 auto;
   padding-top: vars.$spacing-sm;
   
@@ -29,8 +29,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px;
-  height: 100px;
+  width: vars.$logo-size;
+  height: vars.$logo-size;
   border: none;
   border-radius: 0;
 }
