@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
@@ -9,6 +10,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [provideRouter([])],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 

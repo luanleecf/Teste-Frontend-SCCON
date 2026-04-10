@@ -32,4 +32,9 @@ module.exports = {
     '^@assets/(.*)$': '<rootDir>/src/assets/$1',
     '^@environments/(.*)$': '<rootDir>/src/environments/$1',
   },
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '\\.routes\\.ts$',
+    'app\\.config\\.ts$'
+  ],
 };
