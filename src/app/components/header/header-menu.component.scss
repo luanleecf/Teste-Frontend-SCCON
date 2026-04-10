@@ -298,7 +298,7 @@
     visibility: hidden;
     pointer-events: none;
     position: static;
-    background-color: darken(vars.$color-primary, 8%);
+    background-color: vars.$color-primary-dark;
     border: none;
     padding: 0;
     z-index: auto;

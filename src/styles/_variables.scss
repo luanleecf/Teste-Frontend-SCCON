@@ -4,6 +4,7 @@
 
 // -------- CORES --------
 $color-primary: #670000;
+$color-primary-dark: color.adjust(#670000, $lightness: -8%);
 $color-button: #D7DBDD;
 $color-button-hover: color.adjust($color-button, $lightness: -6%);
 $color-button-active: color.adjust($color-button, $lightness: -12%);
