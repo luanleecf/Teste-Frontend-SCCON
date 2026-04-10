@@ -7,7 +7,8 @@
       <button type="button" (click)="toggleSubMenuEnderecos($event)" class="nav-dropdown-trigger"
         [class.open]="subMenuEnderecosAberto" [attr.aria-expanded]="subMenuEnderecosAberto" aria-haspopup="menu"
         aria-label="Menu de Endereços">
-        Endereços
+        <span class="trigger-label">Endereços</span>
+        <span class="trigger-sizer" aria-hidden="true">Buscar Endereços</span>
       </button>
       <div class="nav-dropdown-menu" role="menu" [class.is-open]="subMenuEnderecosAberto"
         [attr.aria-hidden]="!subMenuEnderecosAberto">
@@ -19,7 +20,7 @@
     </div>
   </nav>
 
-  <button class="menu-toggle" type="button" (click)="toggle()" [attr.aria-expanded]="menuAberto"
+  <button class="menu-toggle" type="button" (click)="toggle()" [class.is-open]="menuAberto" [attr.aria-expanded]="menuAberto"
     aria-controls="nav-mobile" aria-label="Abrir menu de navegação mobile">
     <span aria-hidden="true"></span>
     <span aria-hidden="true"></span>
