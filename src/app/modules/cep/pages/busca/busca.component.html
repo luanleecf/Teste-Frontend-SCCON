@@ -10,8 +10,10 @@
           id="cep"
           class="input-cep"
           formControlName="cep"
-          placeholder="Busca por CEP:"
-          maxlength="9"
+          placeholder="00000-000"
+          mask="00000-000"
+          [dropSpecialCharacters]="false"
+          #cepMask="mask"
           [class.is-invalid]="formularioBusca.get('cep')?.invalid && formularioBusca.get('cep')?.touched"
         />
         <button type="submit" class="btn-buscar" [disabled]="carregando">

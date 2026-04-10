@@ -5,11 +5,13 @@ import { Listagem } from '../../components/listagem/listagem.component';
 import { CepService, EnderecoResponse } from '../../services/cep.service';
 import { BuscaHistoricoService } from '../../services/busca-historico.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
   selector: 'sccon-busca-cep',
   standalone: true,
-  imports: [Listagem, CommonModule, ReactiveFormsModule, MatProgressSpinnerModule],
+  // NgxMaskDirective é usada via atributo estático mask="00000-000" no template
+  imports: [Listagem, CommonModule, ReactiveFormsModule, MatProgressSpinnerModule, NgxMaskDirective],
   templateUrl: './busca.component.html',
   styleUrl: './busca.component.scss'
 })
@@ -29,7 +31,7 @@ export class Busca implements OnInit {
 
   private inicializarFormulario(): void {
     this.formularioBusca = this.fb.group({
-      cep: ['', [Validators.required, Validators.pattern(/^\d{5}-?\d{3}$/)]]
+      cep: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
