@@ -1,6 +1,6 @@
-@if (buscas.length > 0) {
+@if (temBuscas()) {
   <div class="listagem-wrapper">
-    <mat-table [dataSource]="buscas" class="tabela-buscas">
+    <mat-table [dataSource]="dataSource" class="tabela-buscas">
 
       <!-- Coluna CEP -->
       <ng-container matColumnDef="cep">
@@ -38,6 +38,13 @@
       <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
       <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
     </mat-table>
+
+    <mat-paginator
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25]"
+      showFirstLastButtons
+      aria-label="Navegar pelas buscas"
+    ></mat-paginator>
   </div>
 }
 
