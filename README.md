@@ -1,59 +1,157 @@
-# ScconApp
+# SCCON — Teste Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.24.
+**Desenvolvedor:** Luan Lee da Costa Faria  
+**Data do teste:** 10/04/2026
 
-## Development server
+---
 
-To start a local development server, run:
+## 📋 Sobre o projeto
 
-```bash
-ng serve
-```
+Aplicação Angular desenvolvida como parte do processo seletivo para a vaga de desenvolvedor front-end da SCCON. O objetivo é buscar endereços a partir de um CEP via API [ViaCEP](https://viacep.com.br), exibir os resultados em uma tabela com histórico persistido e permitir a exclusão de registros.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Como executar
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Pré-requisitos
 
-```bash
-ng generate component component-name
-```
+- Node.js 18+
+- npm 9+
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Instalação
 
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building
-
-To build the project run:
+### Executar em desenvolvimento
 
 ```bash
-ng build
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Acesse `http://localhost:4200`
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Build de produção
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🧪 Testes
 
 ```bash
-ng e2e
+# Executar todos os testes
+npm test
+
+# Executar com relatório de cobertura
+npm run test:coverage
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+**Resultado:** 11 suítes · 120 testes · 100% de cobertura nos arquivos com lógica
 
-## Additional Resources
+> Os únicos arquivos sem cobertura são `app.config.ts`, `app.routes.ts` e `cep.routes.ts` — arquivos declarativos de configuração e rotas, sem lógica testável, o que puxa a média global para ~90%.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## 🗂️ Estrutura do projeto
+
+```
+src/app/
+├── components/
+│   └── header/              # Componente de cabeçalho (separado, compartilhado)
+│       ├── header.component
+│       └── header-menu.component
+├── core/
+│   ├── buscas-api.service   # Comunicação HTTP com a API de buscas (mock)
+│   ├── in-memory-data.service  # Banco de dados em memória (angular-in-memory-web-api)
+│   └── paginator-pt-br      # Tradução do paginador do Angular Material para PT-BR
+└── modules/
+    ├── home/                # Módulo Home (Lazy Load)
+    │   └── pages/home/
+    └── cep/                 # Módulo de Endereços (Lazy Load)
+        ├── pages/busca/     # Página com formulário de busca
+        ├── components/listagem/  # Componente de tabela do histórico
+        └── services/
+            ├── cep.service           # Integração com ViaCEP
+            └── busca-historico.service  # Gerenciamento do histórico de buscas
+```
+
+---
+
+## 🔌 API mockada com `angular-in-memory-web-api`
+
+> ⚠️ **Ponto importante para a avaliação**
+
+A persistência de dados é feita via **REST API simulada em memória**, utilizando o pacote [`angular-in-memory-web-api`](https://github.com/angular/angular-in-memory-web-api). Isso significa que:
+
+- A aplicação realiza requisições HTTP reais (`GET`, `POST`, `DELETE`) que são interceptadas em tempo de execução
+- Os dados **são mantidos durante a sessão** e exibidos corretamente na tabela ao recarregar entre rotas
+- Ao fechar ou recarregar o browser, os dados são resetados (comportamento esperado de um mock em memória)
+- A lógica é idêntica à de uma API REST real — o service `BuscasApiService` usa `HttpClient` normalmente, sem nenhuma condicional de mock no código de produção
+
+**Endpoints simulados:**
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/api/buscas` | Lista todas as buscas realizadas |
+| `POST` | `/api/buscas` | Salva uma nova busca |
+| `DELETE` | `/api/buscas/:id` | Remove uma busca pelo id |
+
+---
+
+## ✅ Requisitos implementados
+
+### Funcionais
+- [x] Busca de CEP via API ViaCEP com tratamento de erros
+- [x] Máscara de CEP (`00000-000`) via `ngx-mask`
+- [x] Validação de CEP com REGEX — borda vermelha quando inválido
+- [x] Reactive Forms com `NonNullableFormBuilder`
+- [x] Tabela com histórico de buscas (CEP · Endereço · Data)
+- [x] Paginação da tabela (5 / 10 / 25 itens por página)
+- [x] Botão para deletar linha individualmente
+- [x] Loader animado (`mat-spinner`) durante a requisição à API
+- [x] Mensagem de feedback com tempo de exibição automático (4s)
+- [x] Animação de entrada nas linhas da tabela (Angular Animations)
+- [x] Redirecionamento automático entre rotas
+
+### Arquitetura
+- [x] Angular 21 com Standalone Components
+- [x] Lazy Load nos módulos Home e CEP
+- [x] Separação de responsabilidades (components, services, models)
+- [x] Observables (RxJS): `switchMap`, `catchError`, `finalize`, `takeUntilDestroyed`
+- [x] Signals e computed signals para estado reativo
+
+### Layout e estilos
+- [x] Header como componente separado com logo SCCON em SVG
+- [x] Menu com cor `#670000`, responsivo com toggle mobile
+- [x] Botões cor `#D7DBDD` com hover escurecendo 6% via mixin SCSS
+- [x] Cantos arredondados nos botões de formulário
+- [x] Transitions em todos os elementos interativos
+- [x] Variáveis SCSS organizadas em `_variables.scss`
+- [x] Pseudo-elementos `::before` / `::after` no menu
+- [x] HTML5 semântico (`header`, `nav`, `main`, `section`)
+- [x] Grid responsivo com Angular Material
+
+### Diferenciais
+- [x] Testes unitários com Jest — 120 testes, 100% de cobertura nos arquivos com lógica
+- [x] Persistência via REST API mockada (`angular-in-memory-web-api`)
+- [x] Favicon SVG customizado com a identidade visual do projeto
+- [x] Paginador do Material traduzido para PT-BR
+
+---
+
+## 🛠️ Tecnologias
+
+| Tecnologia | Versão |
+|---|---|
+| Angular | 21.2 |
+| TypeScript | 5.9 |
+| Angular Material | 21.2 |
+| RxJS | 7.8 |
+| ngx-mask | 21.0 |
+| angular-in-memory-web-api | 0.21 |
+| Jest | 30 |
+| SCSS | — |
