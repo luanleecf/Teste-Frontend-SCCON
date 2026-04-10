@@ -5,7 +5,6 @@
   <div class="form-busca-wrapper">
     <form [formGroup]="formularioBusca" (ngSubmit)="buscar()" class="form-busca">
       <div class="input-group">
-        <!-- <label for="cep" class="label-cep">Busca por CEP:</label> -->
         <input
           type="text"
           id="cep"
@@ -15,10 +14,10 @@
           mask="00000-000"
           [dropSpecialCharacters]="false"
           #cepMask="mask"
-          [class.is-invalid]="formularioBusca.get('cep')?.invalid && formularioBusca.get('cep')?.touched"
+          [class.is-invalid]="formularioBusca.controls.cep.invalid && formularioBusca.controls.cep.touched"
         />
-        <button type="submit" class="btn-buscar" [disabled]="carregando">
-          @if (carregando) {
+        <button type="submit" class="btn-buscar" [disabled]="carregando()">
+          @if (carregando()) {
             <mat-spinner diameter="18"></mat-spinner>
           } @else {
             Buscar
@@ -26,17 +25,20 @@
         </button>
       </div>
 
-      @if (formularioBusca.get('cep')?.errors?.['required'] && formularioBusca.get('cep')?.touched) {
+      @if (formularioBusca.controls.cep.errors?.['required'] && formularioBusca.controls.cep.touched) {
         <small class="msg-erro">CEP é obrigatório</small>
       }
-      @if (formularioBusca.get('cep')?.errors?.['pattern'] && formularioBusca.get('cep')?.touched) {
+      @if (formularioBusca.controls.cep.errors?.['pattern'] && formularioBusca.controls.cep.touched) {
         <small class="msg-erro">Formato inválido. Use: 00000-000</small>
       }
     </form>
 
-    @if (mensagem) {
-      <div class="alerta" [ngClass]="'alerta-' + tipoMensagem">
-        {{ mensagem }}
+    @if (mensagem()) {
+      <div class="alerta"
+        [class.alerta-sucesso]="tipoMensagem() === 'sucesso'"
+        [class.alerta-erro]="tipoMensagem() === 'erro'"
+      >
+        {{ mensagem() }}
       </div>
     }
   </div>
@@ -44,4 +46,5 @@
   <!-- 2) Componente de Listas de Endereços -->
   <sccon-listagem-buscas></sccon-listagem-buscas>
 </section>
+
 

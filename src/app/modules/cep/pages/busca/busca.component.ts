@@ -1,81 +1,104 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxMaskDirective } from 'ngx-mask';
+import { EMPTY, Subject, catchError, finalize, switchMap, tap, timer } from 'rxjs';
 import { Listagem } from '../../components/listagem/listagem.component';
 import { CepService, EnderecoResponse } from '../../services/cep.service';
 import { BuscaHistoricoService } from '../../services/busca-historico.service';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { NgxMaskDirective } from 'ngx-mask';
+
+type TipoMensagem = 'sucesso' | 'erro';
 
 @Component({
   selector: 'sccon-busca-cep',
-  standalone: true,
-  // NgxMaskDirective é usada via atributo estático mask="00000-000" no template
-  imports: [Listagem, CommonModule, ReactiveFormsModule, MatProgressSpinnerModule, NgxMaskDirective],
+  imports: [Listagem, ReactiveFormsModule, MatProgressSpinnerModule, NgxMaskDirective],
   templateUrl: './busca.component.html',
   styleUrl: './busca.component.scss'
 })
-export class Busca implements OnInit {
-  private fb = inject(FormBuilder);
-  private cepService = inject(CepService);
-  private historicoService = inject(BuscaHistoricoService);
+export class Busca {
+  private readonly fb = inject(NonNullableFormBuilder);
+  private readonly cepService = inject(CepService);
+  private readonly historicoService = inject(BuscaHistoricoService);
+  private readonly destroyRef = inject(DestroyRef);
 
-  formularioBusca!: FormGroup;
-  carregando = false;
-  mensagem = '';
-  tipoMensagem: 'sucesso' | 'erro' | '' = '';
+  private readonly CEP_PATTERN = /^\d{5}-\d{3}$/;
 
-  ngOnInit(): void {
-    this.inicializarFormulario();
+  private readonly MENSAGENS = {
+    formularioInvalido: 'Preencha o CEP corretamente',
+    cepNaoEncontrado: 'CEP não encontrado',
+    sucesso: 'Busca realizada com sucesso',
+    erroPadrao: 'Erro ao buscar CEP'
+  } as const;
+
+  readonly carregando = signal(false);
+  readonly mensagem = signal('');
+  readonly tipoMensagem = signal<TipoMensagem | ''>('');
+
+  readonly formularioBusca = this.fb.group({
+    cep: ['', [Validators.required, Validators.pattern(this.CEP_PATTERN)]]
+  });
+
+  private readonly buscarTrigger$ = new Subject<string>();
+
+  constructor() {
+    this.configurarFluxoBusca();
   }
 
-  private inicializarFormulario(): void {
-    this.formularioBusca = this.fb.group({
-      cep: ['', [Validators.required, Validators.minLength(8)]]
-    });
+  private configurarFluxoBusca(): void {
+    this.buscarTrigger$.pipe(
+      tap(() => this.carregando.set(true)),
+      switchMap(cep =>
+        this.cepService.buscarEndereco(cep).pipe(
+          finalize(() => this.carregando.set(false)),
+          catchError(() => {
+            this.exibirMensagem(this.MENSAGENS.erroPadrao, 'erro');
+            return EMPTY;
+          })
+        )
+      ),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(endereco => this.processarResposta(endereco));
   }
 
   buscar(): void {
     if (this.formularioBusca.invalid) {
-      this.exibirMensagem('Preencha todos os campos corretamente', 'erro');
+      this.formularioBusca.markAllAsTouched();
+      this.exibirMensagem(this.MENSAGENS.formularioInvalido, 'erro');
       return;
     }
 
-    const { cep } = this.formularioBusca.value;
-    this.carregando = true;
-    this.tipoMensagem = '';
+    this.buscarTrigger$.next(this.formularioBusca.controls.cep.value);
+  }
 
-    this.cepService.buscarEndereco(cep).subscribe({
-      next: (endereco: EnderecoResponse) => {
-        if (endereco.erro) {
-          this.exibirMensagem('CEP não encontrado', 'erro');
-        } else {
-          const enderecoCompleto = `${endereco.logradouro}, ${endereco.bairro} - ${endereco.localidade}, ${endereco.uf}`;
-          this.historicoService.adicionarBusca({
-            cep: endereco.cep,
-            endereco: enderecoCompleto,
-            dataBusca: new Date()
-          });
-          this.exibirMensagem('Busca realizada com sucesso', 'sucesso');
-          this.formularioBusca.reset();
-        }
-      },
-      error: (erro: Error) => {
-        this.carregando = false;
-        this.exibirMensagem(erro.message || 'Erro ao buscar CEP', 'erro');
-      },
-      complete: () => {
-        this.carregando = false;
-      }
+  private processarResposta(endereco: EnderecoResponse): void {
+    if (endereco.erro) {
+      this.exibirMensagem(this.MENSAGENS.cepNaoEncontrado, 'erro');
+      return;
+    }
+
+    this.historicoService.adicionarBusca({
+      cep: endereco.cep,
+      endereco: this.montarEnderecoCompleto(endereco),
+      dataBusca: new Date()
+    });
+    this.exibirMensagem(this.MENSAGENS.sucesso, 'sucesso');
+    this.formularioBusca.reset();
+  }
+
+  private montarEnderecoCompleto(endereco: EnderecoResponse): string {
+    return `${endereco.logradouro}, ${endereco.bairro} - ${endereco.localidade}, ${endereco.uf}`;
+  }
+
+  private exibirMensagem(msg: string, tipo: TipoMensagem): void {
+    this.mensagem.set(msg);
+    this.tipoMensagem.set(tipo);
+    timer(4000).pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(() => {
+      this.mensagem.set('');
+      this.tipoMensagem.set('');
     });
   }
-
-  private exibirMensagem(msg: string, tipo: 'sucesso' | 'erro'): void {
-    this.mensagem = msg;
-    this.tipoMensagem = tipo;
-    setTimeout(() => {
-      this.tipoMensagem = '';
-      this.mensagem = '';
-    }, 4000);
-  }
 }
+
