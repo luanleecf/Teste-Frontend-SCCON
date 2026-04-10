@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #d8d8d8; // Cinza como no wireframe
+  background-color: vars.$color-background-alt; // Cinza como no wireframe
   padding: vars.$spacing-lg;
 
   @media (max-width: vars.$breakpoint-md) {
@@ -52,7 +52,7 @@
 
 .subtitle {
   font-size: vars.$font-size-base;
-  color: #666666;
+  color: vars.$color-text-light;
   margin: 0;
   line-height: 1.6;
   font-style: italic;

@@ -1,72 +1,80 @@
+@use '../../../../../styles/variables' as v;
+
 .busca-page {
-  padding: 2rem;
+  padding: v.$spacing-lg;
   max-width: 1000px;
   margin: 0 auto;
 }
 
 .titulo-pagina {
-  font-size: 1.4rem;
+  font-size: v.$font-size-lg;
   font-weight: 400;
-  color: #333;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid #ddd;
+  color: v.$color-text;
+  margin-bottom: v.$spacing-md;
+  padding-bottom: v.$spacing-xs;
+  border-bottom: 1px solid v.$color-border;
 }
 
 .form-busca-wrapper {
-  margin-bottom: 2rem;
+  margin-bottom: v.$spacing-lg;
 }
 
 .form-busca {
   .input-group {
     display: flex;
-    gap: 0;
-    align-items: stretch;
-    max-width: 560px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .label-cep {
+    font-size: v.$font-size-base;
+    color: v.$color-text;
+    white-space: nowrap;
   }
 
   .input-cep {
-    flex: 1;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid #aaa;
-    border-right: none;
-    border-radius: 4px 0 0 4px;
-    font-size: 0.95rem;
-    background-color: #fff;
+    width: 220px;
+    padding: 0.4rem 0.65rem;
+    border: 1px solid v.$color-border-input;
+    border-radius: v.$border-radius-sm;
+    font-size: v.$font-size-base;
+    background-color: v.$color-white;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
     &:focus {
       outline: none;
-      border-color: #670000;
+      border-color: v.$color-primary;
       box-shadow: 0 0 0 2px rgba(103, 0, 0, 0.1);
     }
 
     &.is-invalid {
-      border-color: #dc3545;
+      border-color: v.$color-error;
     }
 
     &::placeholder {
-      color: #555;
+      color: v.$color-text-light;
     }
   }
 
   .btn-buscar {
-    background-color: #D7DBDD;
-    color: #333;
-    border: 1px solid #aaa;
-    padding: 0.5rem 1.25rem;
-    font-size: 0.95rem;
+    background-color: v.$color-button;
+    color: v.$color-text;
+    border: 1px solid v.$color-border-input;
+    padding: 0.4rem 1.25rem;
+    font-size: v.$font-size-base;
     font-weight: 500;
-    border-radius: 0 4px 4px 0;
+    border-radius: v.$border-radius-sm;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color v.$transition-speed ease;
     display: flex;
     align-items: center;
     gap: 0.4rem;
     white-space: nowrap;
 
     &:hover:not(:disabled) {
-      background-color: darken(#D7DBDD, 6%);
+      background-color: v.$color-button-hover;
     }
 
     &:disabled {
@@ -77,29 +85,31 @@
 
   .msg-erro {
     display: block;
+    width: 100%;
+    text-align: center;
     margin-top: 0.35rem;
-    font-size: 0.8rem;
-    color: #dc3545;
+    font-size: v.$font-size-sm;
+    color: v.$color-error;
   }
 }
 
 .alerta {
-  margin-top: 1rem;
-  padding: 0.75rem 1rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  animation: slideDown 0.3s ease;
+  margin-top: v.$spacing-sm;
+  padding: 0.75rem v.$spacing-sm;
+  border-radius: v.$border-radius-sm;
+  font-size: v.$font-size-sm;
+  animation: slideDown v.$transition-speed ease;
 
   &.alerta-sucesso {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background-color: v.$color-success-bg;
+    color: v.$color-success-text;
+    border: 1px solid v.$color-success-border;
   }
 
   &.alerta-erro {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+    background-color: v.$color-error-bg;
+    color: v.$color-error-text;
+    border: 1px solid v.$color-error-border;
   }
 }
 
@@ -108,9 +118,9 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 576px) {
+@media (max-width: v.$breakpoint-sm) {
   .busca-page {
-    padding: 1rem;
+    padding: v.$spacing-sm;
   }
 
   .form-busca .input-group {
