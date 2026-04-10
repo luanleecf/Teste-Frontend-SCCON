@@ -1,7 +1,44 @@
-<div class="busca-container">
-  <h2>Busca de CEP</h2>
-  <p>Utilize este formulário para buscar informações de CEP.</p>
-  <!-- Formulário será implementado aqui -->
+<section class="busca-page">
+  <h2 class="titulo-pagina">Busca de Endereços</h2>
+
+  <!-- 1) Componente de Busca / Form -->
+  <div class="form-busca-wrapper">
+    <form [formGroup]="formularioBusca" (ngSubmit)="buscar()" class="form-busca">
+      <div class="input-group">
+        <input
+          type="text"
+          id="cep"
+          class="input-cep"
+          formControlName="cep"
+          placeholder="Busca por CEP:"
+          maxlength="9"
+          [class.is-invalid]="formularioBusca.get('cep')?.invalid && formularioBusca.get('cep')?.touched"
+        />
+        <button type="submit" class="btn-buscar" [disabled]="carregando">
+          @if (carregando) {
+            <mat-spinner diameter="18"></mat-spinner>
+          } @else {
+            Buscar
+          }
+        </button>
+      </div>
+
+      @if (formularioBusca.get('cep')?.errors?.['required'] && formularioBusca.get('cep')?.touched) {
+        <small class="msg-erro">CEP é obrigatório</small>
+      }
+      @if (formularioBusca.get('cep')?.errors?.['pattern'] && formularioBusca.get('cep')?.touched) {
+        <small class="msg-erro">Formato inválido. Use: 00000-000</small>
+      }
+    </form>
+
+    @if (mensagem) {
+      <div class="alerta" [ngClass]="'alerta-' + tipoMensagem">
+        {{ mensagem }}
+      </div>
+    }
+  </div>
+
+  <!-- 2) Componente de Listas de Endereços -->
   <sccon-listagem-buscas></sccon-listagem-buscas>
-</div>
+</section>
 

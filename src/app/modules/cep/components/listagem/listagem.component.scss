@@ -1,18 +1,51 @@
-.listagem-container {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background-color: #f5f5f5;
-  border-radius: 8px;
+.listagem-wrapper {
+  margin-top: 1.5rem;
+}
 
-  h3 {
+.tabela-buscas {
+  width: 100%;
+
+  .mat-mdc-header-cell {
+    font-weight: 600;
+    font-size: 0.9rem;
     color: #333;
-    margin-top: 0;
-    margin-bottom: 1rem;
+    background-color: #f5f5f5;
   }
 
-  .info-text {
-    color: #999;
-    font-style: italic;
-    margin: 0;
+  .mat-mdc-cell {
+    font-size: 0.875rem;
+    color: #444;
+  }
+
+  .mat-mdc-row {
+    &:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+
+  .cel-acao {
+    width: 48px;
+    text-align: right;
+
+    .btn-deletar {
+      background: none;
+      border: none;
+      color: #666;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 2px;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #dc3545;
+      }
+    }
   }
 }
+
