@@ -6,6 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { BuscaHistoricoService, BuscaRealizada } from '../../services/busca-historico.service';
 
+interface BuscaRealizadaView extends BuscaRealizada {
+  dataFormatada: string;
+}
+
 @Component({
   selector: 'sccon-listagem-buscas',
   imports: [MatTableModule, MatButtonModule, MatIconModule, MatPaginatorModule],
@@ -19,7 +23,7 @@ export class Listagem {
   private readonly FORMATO_HORA: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit' };
 
   readonly colunas: string[] = ['cep', 'endereco', 'dataBusca', 'acao'];
-  readonly dataSource = new MatTableDataSource<BuscaRealizada>();
+  readonly dataSource = new MatTableDataSource<BuscaRealizadaView>();
   readonly pageSize = 5;
 
   private readonly totalBuscas = signal(0);
@@ -37,20 +41,20 @@ export class Listagem {
     this.historicoService.obterHistorico()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(buscas => {
-        this.dataSource.data = buscas;
+        this.dataSource.data = buscas.map(b => this.paraBuscaView(b));
         this.totalBuscas.set(buscas.length);
       });
   }
 
-  deletarBusca(id: string): void {
-    this.historicoService.removerBusca(id);
-  }
-
-  formatarData(data: Date): string {
-    const d = new Date(data);
+  private paraBuscaView(busca: BuscaRealizada): BuscaRealizadaView {
+    const d = new Date(busca.dataBusca);
     const dia = d.toLocaleDateString('pt-BR');
     const hora = d.toLocaleTimeString('pt-BR', this.FORMATO_HORA);
-    return `${dia} - ${hora}`;
+    return { ...busca, dataFormatada: `${dia} - ${hora}` };
+  }
+
+  deletarBusca(id: string): void {
+    this.historicoService.removerBusca(id);
   }
 }
 

@@ -1,19 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
-
-// ========== IMPORTAR VARIÁVEIS ==========
 @use 'styles/variables' as vars;
 
-// ========== IMPORTAR TEMAS ANGULAR MATERIAL ==========
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
-// ========== ESTILOS GLOBAIS ==========
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: vars.$font-family;

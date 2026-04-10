@@ -1,50 +1,37 @@
 @if (temBuscas()) {
-  <div class="listagem-wrapper">
-    <mat-table [dataSource]="dataSource" class="tabela-buscas">
+<section class="listagem-wrapper" aria-label="Histórico de buscas realizadas">
+  <mat-table [dataSource]="dataSource" class="tabela-buscas">
 
-      <!-- Coluna CEP -->
-      <ng-container matColumnDef="cep">
-        <mat-header-cell *matHeaderCellDef>CEP</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.cep }}</mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="cep">
+      <mat-header-cell *matHeaderCellDef>CEP</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.cep }}</mat-cell>
+    </ng-container>
 
-      <!-- Coluna Endereço -->
-      <ng-container matColumnDef="endereco">
-        <mat-header-cell *matHeaderCellDef>Endereço</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.endereco }}</mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="endereco">
+      <mat-header-cell *matHeaderCellDef>Endereço</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.endereco }}</mat-cell>
+    </ng-container>
 
-      <!-- Coluna Data -->
-      <ng-container matColumnDef="dataBusca">
-        <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ formatarData(row.dataBusca) }}</mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="dataBusca">
+      <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.dataFormatada }}</mat-cell>
+    </ng-container>
 
-      <!-- Coluna Ação -->
-      <ng-container matColumnDef="acao">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let row" class="cel-acao">
-          <button
-            mat-icon-button
-            class="btn-deletar"
-            (click)="deletarBusca(row.id)"
-            title="Remover"
-          >
-            X
-          </button>
-        </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="acao">
+      <mat-header-cell *matHeaderCellDef aria-label="Ações"></mat-header-cell>
+      <mat-cell *matCellDef="let row" class="cel-acao">
+        <button type="button" mat-icon-button class="btn-deletar" (click)="deletarBusca(row.id)"
+          [attr.aria-label]="'Remover busca ' + row.cep">
+          <mat-icon aria-hidden="true">close</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
 
-      <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
-    </mat-table>
+    <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
+  </mat-table>
 
-    <mat-paginator
-      [pageSize]="pageSize"
-      [pageSizeOptions]="[5, 10, 25]"
-      showFirstLastButtons
-      aria-label="Navegar pelas buscas"
-    ></mat-paginator>
-  </div>
+  <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons
+    aria-label="Navegar pelas buscas"></mat-paginator>
+</section>
 }
-

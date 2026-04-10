@@ -40,12 +40,15 @@
 // -------- DROPDOWN DESKTOP --------
 .nav-dropdown {
   position: relative;
+  display: inline-grid;
 }
 
 .nav-dropdown-trigger {
+  grid-area: 1 / 1;
   display: flex;
   align-items: center;
   gap: vars.$spacing-sm;
+  width: 100%;
   color: vars.$color-text;
   text-decoration: none;
   font-size: vars.$font-size-base;
@@ -83,20 +86,30 @@
 }
 
 .nav-dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+  grid-area: 1 / 1;
+  align-self: end;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
   background-color: vars.$color-primary;
   border: 1px solid vars.$color-button-hover;
   border-top: none;
   z-index: vars.$nav-dropdown-z-index;
-  animation: slideDown vars.$transition-speed vars.$transition-easing;
+
+  &.is-open {
+    height: auto;
+    overflow: visible;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(100%);
+    animation: slideDown vars.$transition-speed vars.$transition-easing;
+  }
 }
 
 .nav-dropdown-item {
   display: block;
-  width: 100%;
+  white-space: nowrap;
   color: vars.$color-text;
   text-decoration: none;
   font-size: vars.$font-size-base;
@@ -209,6 +222,7 @@
   .nav-dropdown {
     width: 100%;
     position: static;
+    display: block;
   }
 
   .nav-dropdown-trigger {
@@ -238,12 +252,26 @@
   }
 
   .nav-dropdown-menu {
+    grid-area: unset;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
     position: static;
     background-color: darken(vars.$color-primary, 8%);
     border: none;
     padding: 0;
-    animation: none;
     z-index: auto;
+    transform: none;
+
+    &.is-open {
+      height: auto;
+      overflow: visible;
+      visibility: visible;
+      pointer-events: auto;
+      transform: none;
+      animation: none;
+    }
   }
 
   .nav-dropdown-item {
