@@ -53,13 +53,15 @@ export class Busca implements OnInit {
           const enderecoCompleto = `${endereco.logradouro}, ${endereco.bairro} - ${endereco.localidade}, ${endereco.uf}`;
           this.historicoService.adicionarBusca({
             cep: endereco.cep,
-            endereco: enderecoCompleto
+            endereco: enderecoCompleto,
+            dataBusca: new Date()
           });
           this.exibirMensagem('Busca realizada com sucesso', 'sucesso');
           this.formularioBusca.reset();
         }
       },
       error: (erro: Error) => {
+        this.carregando = false;
         this.exibirMensagem(erro.message || 'Erro ao buscar CEP', 'erro');
       },
       complete: () => {

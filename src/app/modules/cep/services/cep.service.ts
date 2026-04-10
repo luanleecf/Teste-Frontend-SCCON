@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpXhrBackend } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -19,7 +19,8 @@ export interface EnderecoResponse {
 export class CepService {
   private apiUrl = 'https://viacep.com.br/ws';
 
-  constructor(private http: HttpClient) {}
+  // HttpXhrBackend é o backend XHR nativo — não é substituído pelo in-memory web api
+  private http = new HttpClient(inject(HttpXhrBackend));
 
   buscarEndereco(cep: string): Observable<EnderecoResponse> {
     // Remove máscara do CEP (00000-000 → 00000000)
