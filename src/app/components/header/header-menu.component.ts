@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef } from '@angular/core';
+import { Component, HostListener, ElementRef, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -8,30 +8,16 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header-menu.component.scss'
 })
 export class HeaderMenu {
+  private readonly elementRef = inject(ElementRef);
+
   menuAberto = false;
   subMenuEnderecosAberto = false;
 
-  constructor(private elementRef: ElementRef) { }
-
-  /**
-   * NOTA ARQUITETURAL:
-   * Por que NÃO usamos uma diretiva reutilizável para dropdown?
-   *
-   * Aplicamos o princípio YAGNI (You Aren't Gonna Need It):
-   * - Temos apenas 1 dropdown confirmado (Endereços)
-   * - Criar uma diretiva agora seria over-engineering
-   * - Refatoraremos para diretiva quando tivermos 2+ dropdowns
-   * - Por enquanto, mantemos lógica simples + HostListener para fechar ao clicar fora
-   *
-   * Benefício: Código limpo, sem abstração prematura, fácil manutenção.
-   */
   @HostListener('document:click', ['$event'])
   clickFora(evento: MouseEvent): void {
-    const target = evento.target as HTMLElement;
-    if (!this.elementRef.nativeElement.contains(target)) {
-      this.subMenuEnderecosAberto = false;
-      this.menuAberto = false; // Mobile: fecha o menu inteiro ao clicar fora
-    }
+    const clicouDentro = this.elementRef.nativeElement.contains(evento.target as HTMLElement);
+    if (clicouDentro) return;
+    this.fecharMenu();
   }
 
   toggle(): void {
