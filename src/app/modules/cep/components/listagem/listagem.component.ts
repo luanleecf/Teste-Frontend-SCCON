@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, DestroyRef, ViewChild, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -14,7 +15,15 @@ interface BuscaRealizadaView extends BuscaRealizada {
   selector: 'sccon-listagem-buscas',
   imports: [MatTableModule, MatButtonModule, MatIconModule, MatPaginatorModule],
   templateUrl: './listagem.component.html',
-  styleUrl: './listagem.component.scss'
+  styleUrl: './listagem.component.scss',
+  animations: [
+    trigger('linhaAnimada', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-6px)' }),
+        animate('180ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
 export class Listagem {
   private readonly historicoService = inject(BuscaHistoricoService);

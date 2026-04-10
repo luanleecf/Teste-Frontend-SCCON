@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs';
 import { Listagem } from './listagem.component';
 import { BuscaHistoricoService, BuscaRealizada } from '../../services/busca-historico.service';
@@ -36,6 +37,7 @@ describe('Listagem', () => {
     await TestBed.configureTestingModule({
       imports: [Listagem],
       providers: [
+        provideAnimations(),
         { provide: BuscaHistoricoService, useValue: mockHistoricoService },
       ],
       schemas: [NO_ERRORS_SCHEMA],
