@@ -3,6 +3,8 @@
 **Desenvolvedor:** Luan Lee da Costa Faria  
 **Data do teste:** 10/04/2026
 
+🔗 **[Projeto publicado](https://luanleecf.github.io/Teste-Frontend-SCCON/home)**
+
 ---
 
 ## 📋 Sobre o projeto
