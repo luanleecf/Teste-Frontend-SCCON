@@ -43,6 +43,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/Teste-Frontend-SCCON/",
               "budgets": [
                 {
                   "type": "initial",
