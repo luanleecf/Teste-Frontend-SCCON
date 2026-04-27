@@ -15,6 +15,10 @@ export const routes: Routes = [
     loadComponent: () => import('./modules/cep/pages/busca/busca.component').then(m => m.Busca)
   },
   {
+    path: 'webgis',
+    loadChildren: () => import('./modules/webgis/webgis.routes').then(m => m.WEBGIS_ROUTES)
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }

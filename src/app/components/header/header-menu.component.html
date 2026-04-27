@@ -3,6 +3,9 @@
     <a routerLink="/home" routerLinkActive="active" (click)="fecharMenu()" class="nav-item" aria-label="Ir para Home">
       Home
     </a>
+    <a routerLink="/webgis" routerLinkActive="active" (click)="fecharMenu()" class="nav-item" aria-label="Ir para WebGIS">
+      WebGIS
+    </a>
     <div class="nav-dropdown">
       <button type="button" (click)="toggleSubMenuEnderecos($event)" class="nav-dropdown-trigger"
         [class.open]="subMenuEnderecosAberto" [attr.aria-expanded]="subMenuEnderecosAberto" aria-haspopup="menu"
